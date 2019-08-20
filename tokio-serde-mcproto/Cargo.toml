@@ -1,0 +1,13 @@
+[package]
+name = "tokio-serde-mcproto"
+version = "0.1.0"
+authors = ["n.khanipov <n.khanipov@pflb.ru>"]
+edition = "2018"
+
+[dependencies]
+tokio-serde = "0.3.0"
+tokio = "0.1"
+serde-mcproto = {path = "../serde-mcproto"}
+bytes = "0.4.12"
+serde = "1.0.98"
+futures = "0.1.28"

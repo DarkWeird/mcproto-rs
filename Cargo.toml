@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "serde-mcproto",
+    "mcproto",
+    "tokio-serde-mcproto",
+    "example-client"
+    ]
+

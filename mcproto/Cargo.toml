@@ -1,0 +1,13 @@
+[package]
+name = "mcproto"
+version = "0.1.0"
+authors = ["n.khanipov <n.khanipov@pflb.ru>"]
+edition = "2018"
+
+[dependencies]
+byteorder = "1.3.2"
+uuid = "0.7.4"
+serde = "1.0.97"
+serde_derive= "1.0.97"
+serde-mcproto = {path = "../serde-mcproto"}
+hematite-nbt = "0.4.0"
