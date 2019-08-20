@@ -1,7 +1,7 @@
 [package]
 name = "mcproto"
 version = "0.1.0"
-authors = ["n.khanipov <n.khanipov@pflb.ru>"]
+authors = ["Nail Khanipov <foxflameless@gmail.com>"]
 edition = "2018"
 
 [dependencies]
