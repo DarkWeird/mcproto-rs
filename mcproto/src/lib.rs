@@ -1,7 +1,8 @@
 //mod chat;
 extern crate serde_mcproto;
 
-pub mod packet;
+pub mod v1_7_10;
+// pub mod v1_8;
 
 pub use serde_mcproto::de::deserialize;
 pub use serde_mcproto::ser::serialize;

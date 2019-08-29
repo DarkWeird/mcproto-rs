@@ -5,9 +5,13 @@ authors = ["Nail Khanipov <foxflameless@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-tokio-serde = "0.3.0"
-tokio = "0.1"
+tokio = "0.2.0-alpha.2"
 serde-mcproto = {path = "../serde-mcproto"}
 bytes = "0.4.12"
 serde = "1.0.98"
-futures = "0.1.28"
+
+[dependencies.futures-preview]
+version = "=0.3.0-alpha.18"
+
+[dependencies.futures-util-preview]
+version = "=0.3.0-alpha.18"

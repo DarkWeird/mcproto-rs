@@ -1,18 +1,19 @@
-use serde::{Serialize, Serializer, Deserialize, Deserializer};
 use crate::ser::write::{write_varint, write_varlong};
-use serde::de::{Visitor, DeserializeSeed, MapAccess};
-use serde::export::{Formatter};
+use serde::de::{DeserializeSeed, MapAccess, Visitor};
+use serde::export::Formatter;
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
-#[derive(Debug)]
-pub struct VarInt(i32);
+#[derive(Debug, Clone)]
+pub struct VarInt(pub i32);
 
-#[derive(Debug)]
-pub struct VarLong(i64);
-
+#[derive(Debug, Clone)]
+pub struct VarLong(pub i64);
 
 impl Serialize for VarInt {
-    fn serialize<S>(&self, serializer: S) -> Result<<S as Serializer>::Ok, S::Error> where
-        S: Serializer {
+    fn serialize<S>(&self, serializer: S) -> Result<<S as Serializer>::Ok, S::Error>
+    where
+        S: Serializer,
+    {
         let mut bytes: Vec<u8> = Vec::new();
         write_varint(&self.0, &mut bytes);
         serializer.serialize_bytes(bytes.as_slice())
@@ -20,18 +21,21 @@ impl Serialize for VarInt {
 }
 
 impl Serialize for VarLong {
-    fn serialize<S>(&self, serializer: S) -> Result<<S as Serializer>::Ok, S::Error> where
-        S: Serializer {
+    fn serialize<S>(&self, serializer: S) -> Result<<S as Serializer>::Ok, S::Error>
+    where
+        S: Serializer,
+    {
         let mut bytes: Vec<u8> = Vec::new();
         write_varlong(&self.0, &mut bytes);
         serializer.serialize_bytes(bytes.as_slice())
     }
 }
 
-
 impl<'de> Deserialize<'de> for VarLong {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where
-        D: Deserializer<'de> {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
         struct VarLongVisitor;
         impl<'de> Visitor<'de> for VarLongVisitor {
             type Value = VarLong;
@@ -40,8 +44,10 @@ impl<'de> Deserialize<'de> for VarLong {
                 formatter.write_str("varlong")
             }
 
-            fn visit_i64<E>(self, v: i64) -> Result<Self::Value, E> where
-                E: serde::de::Error, {
+            fn visit_i64<E>(self, v: i64) -> Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
                 Ok(VarLong(v))
             }
         }
@@ -50,8 +56,10 @@ impl<'de> Deserialize<'de> for VarLong {
 }
 
 impl<'de> Deserialize<'de> for VarInt {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error> where
-        D: Deserializer<'de> {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
         struct VarIntVisitor;
         impl<'de> Visitor<'de> for VarIntVisitor {
             type Value = VarInt;
@@ -60,15 +68,16 @@ impl<'de> Deserialize<'de> for VarInt {
                 formatter.write_str("varint")
             }
 
-            fn visit_i32<E>(self, v: i32) -> Result<Self::Value, E> where
-                E: serde::de::Error, {
+            fn visit_i32<E>(self, v: i32) -> Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
                 Ok(VarInt(v))
             }
         }
         deserializer.deserialize_newtype_struct("MCVARINT", VarIntVisitor)
     }
 }
-
 
 impl From<i32> for VarInt {
     #[inline]

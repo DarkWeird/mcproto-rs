@@ -9,10 +9,10 @@ use serde::de::{Visitor, SeqAccess, DeserializeOwned, DeserializeSeed};
 use std::convert::TryInto;
 use core::borrow::Borrow;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Clone, Serialize)]
 pub struct EntityMetadata(HashMap<u8, Entry>);
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Entry {
     Byte(i8),
     Short(i16),

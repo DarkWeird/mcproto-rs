@@ -3,7 +3,7 @@ use serde::de::{SeqAccess, Visitor, DeserializeSeed};
 
 use super::array::IntPrefix;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Clone, Serialize)]
 pub struct ChunkDataBulk {
     chunk_column_count: i16,
     data_length: i32,
@@ -12,7 +12,7 @@ pub struct ChunkDataBulk {
     meta: Vec<ChunkMeta>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ChunkMeta {
     x: i32,
     z: i32,

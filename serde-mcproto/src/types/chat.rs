@@ -1,6 +1,6 @@
 use serde::{Serialize, Serializer, Deserialize, Deserializer};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Chat {
     //TODO implement normally
     msg: String

@@ -1,7 +1,7 @@
 use serde::{Serialize, Serializer, Deserialize, Deserializer};
 use serde::de::Visitor;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Uuid(pub uuid::Uuid);
 
 impl Into<uuid::Uuid> for Uuid {
@@ -50,7 +50,7 @@ impl<'de> Deserialize<'de> for Uuid {
 }
 
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Uuidi128(pub uuid::Uuid);
 
 impl Into<uuid::Uuid> for Uuidi128 {
